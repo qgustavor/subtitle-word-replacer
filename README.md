@@ -6,7 +6,7 @@ A WebExtension that replaces words and expressions in subtitles.
 
 ## Installing
 
-*Work in progress...*
+XPI files can be downloaded [in the releases page](https://github.com/qgustavor/subtitle-word-replacer/releases/).
 
 ## How it works
 
