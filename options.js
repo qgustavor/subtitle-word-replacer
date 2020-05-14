@@ -1,3 +1,5 @@
+/* global browser */
+
 const replacementListElement = document.querySelector('#replacement-list')
 let replacementList = []
 
@@ -28,7 +30,7 @@ async function loadReplacementList () {
 function renderReplacementList () {
   replacementListElement.innerHTML = ''
 
-  for (let entry of replacementList) {
+  for (const entry of replacementList) {
     const liWrapper = document.createElement('li')
     const fromEl = document.createElement('strong')
     fromEl.textContent = entry.from
