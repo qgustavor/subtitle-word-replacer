@@ -1,0 +1,36 @@
+{
+  "background": {
+      "scripts": ["background.js"]
+  },
+  "browser_action": {
+      "default_title": "Options"
+  },
+  "description": "Replace words in Crunchyroll Subtitles",
+  "homepage_url": "https://github.com/qgustavor/subtitle-word-replacer",
+  "manifest_version": 2,
+  "name": "Subtitle Word Replacer",
+  "options_ui": {
+      "page": "options.html",
+      "browser_style": true
+  },
+  "icons": {
+    "48": "icon.svg",
+    "96": "icon.svg"
+  },
+  "permissions": [
+      "storage",
+      "webRequest",
+      "webRequestBlocking",
+      "https://dl.v.vrv.co/*",
+      "https://a-vrv.akamaized.net/*",
+      "https://www.crunchyroll.com/*",
+      "https://static.crunchyroll.com/*"
+  ],
+  "version": "1.1",
+  "browser_specific_settings": {
+      "gecko": {
+          "id": "subtitle-word-replacer@qgustavor.tk",
+          "strict_min_version": "57.0a1"
+      }
+  }
+}

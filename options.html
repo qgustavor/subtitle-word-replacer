@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style>
+li {
+    height: 1.5em;
+    clear: both;
+    border-bottom: 1px dotted #AAA;
+}
+li > button {
+    float: right;
+}
+</style>
+
+<p>Replaced words and expressions:</p>
+
+<ul id="replacement-list"></ul>
+
+<form>
+    <label>Add new replacement</label>
+    <input type="text" id="from" placeholder="word to be replaced">
+    <input type="text" id="to" placeholder="replacement word">
+    <button type="submit">Save</button>
+</form>
+
+<p>Add "/" at the beginning to use regular expressions. By default it will replace
+replace whole words case-sensitive.</p>
+
+<script src="options.js"></script>
