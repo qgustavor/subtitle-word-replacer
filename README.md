@@ -25,7 +25,7 @@ By default this extension also hides the play button and overlay when paused so 
 It only works in Firefox, because it's the only browser that supports
 [request filtering](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/filterResponseData).
 
-At the moment it only works in [Crunchyroll](https://www.crunchyroll.com/) because is probably the only anime website that use the [Advanced SubStation Alpha](https://en.wikipedia.org/wiki/SubStation_Alpha#Advanced_SubStation_Alpha) subtitle format (other legal websites use WebVTT, pirate websites use hardsub). If you know other website that use ASS and want it to be supported then open an issue.
+At the moment it only works in [Crunchyroll](https://www.crunchyroll.com/) because is probably the only anime website that use the [Advanced SubStation Alpha](https://en.wikipedia.org/wiki/SubStation_Alpha#Advanced_SubStation_Alpha) subtitle format (other legal websites use WebVTT, not even pirate websites use ASS, they use hardsub). If you know other *legal* website that use ASS and want it to be supported then open an issue.
 
 ## Credits
 

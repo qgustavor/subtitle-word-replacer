@@ -1,0 +1,14 @@
+{
+  "addons": {
+    "subtitle-word-replacer@qgustavor.tk": {
+      "updates": [
+        {
+          "version": "2.0",
+          "update_link": "https://github.com/qgustavor/subtitle-word-replacer/releases/download/v2.0/better_anime_subtitles-2.0-fx.xpi",
+          "update_hash": "sha256:ae9542af6c9136158944d4cce34995968dfedb4a287cc79463be4bc824a775ae",
+          "update_info_url": "https://github.com/qgustavor/subtitle-word-replacer/releases/tag/v2.0"
+        }
+      ]
+    }
+  }
+}

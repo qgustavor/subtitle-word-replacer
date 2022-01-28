@@ -33,7 +33,8 @@
   "browser_specific_settings": {
       "gecko": {
           "id": "subtitle-word-replacer@qgustavor.tk",
-          "strict_min_version": "57.0a1"
+          "strict_min_version": "57.0a1",
+          "update_url": "https://raw.githubusercontent.com/qgustavor/subtitle-word-replacer/master/gecko_updates.json"
       }
   }
 }
