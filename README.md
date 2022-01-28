@@ -2,8 +2,6 @@
 
 Formerly "Subtitle Word Replacer". A WebExtension that improves anime subtitles.
 
-![Screenshot of how the WebExtension works.](https://i.imgur.com/xBS3uix.png)
-
 ## Installing
 
 XPI files can be downloaded [in the releases page](https://github.com/qgustavor/subtitle-word-replacer/releases/).
@@ -30,8 +28,5 @@ It only works in Firefox, because it's the only browser that supports
 At the moment it only works in [Crunchyroll](https://www.crunchyroll.com/) because is probably the only anime website that use the [Advanced SubStation Alpha](https://en.wikipedia.org/wiki/SubStation_Alpha#Advanced_SubStation_Alpha) subtitle format (other legal websites use WebVTT, pirate websites use hardsub). If you know other website that use ASS and want it to be supported then open an issue.
 
 ## Credits
-
-Tower of God, as shown in the screenshot, is a work of Lee Jong-hui / SIU, Crunchyroll, and Webtoon.
-The screenshot is used just to show how the extension works.
 
 The extension icon was created by [Candy Design](https://www.iconfinder.com/icons/5243667/).
