@@ -1,29 +1,66 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<meta name="color-scheme" content="light dark">
 
 <style>
 li {
-    height: 1.5em;
-    clear: both;
-    border-bottom: 1px dotted #AAA;
+  height: 1.5em;
+  clear: both;
+  border-bottom: 1px dotted #AAA;
 }
 li > button {
-    float: right;
+  float: right;
+}
+#example-replacements li {
+  cursor: pointer;
+}
+body {
+  margin: 1em;
+}
+form {
+  padding-bottom: 1em;
+}
+@media screen and (prefers-color-scheme: dark) {
+  body {
+    color: #fbfbfe;
+    background-color: #23222b;
+  }
 }
 </style>
 
-<p>Replaced words and expressions:</p>
+<h2>Basic improvements:</h2>
+
+<form>
+  <label>Text scale (%): <input id="textScale" value="100" type="number" min="10" max="300" step="any"></label>
+</form>
+
+<form>
+  <label><input id="hidePausedOverlay" type="checkbox" checked> Disable paused overlay</label>
+</form>
+
+<form>
+  <label>Show hidden comments: <input id="hiddenNotePattern" type="text" value="[NOTE: %]"></label><br>
+  <small>The "%" mark where to put the comment contents. Default value is "[NOTE: %]". Other common patterns are "(%)", "(Translator's note: %)" and "(TN: %)". Leave blank to not show hidden comments.</small>
+</form>
+
+<h2>Replaced words and expressions:</h2>
 
 <ul id="replacement-list"></ul>
 
-<form>
-    <label>Add new replacement</label>
-    <input type="text" id="from" placeholder="word to be replaced">
-    <input type="text" id="to" placeholder="replacement word">
-    <button type="submit">Save</button>
+<form id="new-replacement">
+  <label>Add new replacement</label>
+  <input type="text" id="from" placeholder="word to be replaced">
+  <input type="text" id="to" placeholder="replacement word">
+  <button type="submit">Save</button>
 </form>
 
-<p>Add "/" at the beginning to use regular expressions. By default it will replace
-replace whole words case-sensitive.</p>
+<p>Add "/" at the beginning to use regular expressions. By default it will replace replace whole words case-sensitive.</p>
+
+<h3>Example replacements (click to copy to above):</h3>
+<ul id="example-replacements">
+  <li>Fancy ellipses: <code>...</code> → <code>…</code></li>
+  <li>Fancy quotes: <code>/"([^"]+)"/g</code> → <code>“$1”</code></li>
+  <li>Fix broken characters: <code>/([☆★♡]+)/g</code> → <code>{\fnArial Unicode MS}$1{\r}</code></li>
+</ul>
 
 <script src="options.js"></script>

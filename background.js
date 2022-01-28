@@ -7,18 +7,24 @@ function handleClick () {
 
 browser.browserAction.onClicked.addListener(handleClick)
 
-// Handles replacement list loading
+// Settings
 let replacementList = []
+let textScale = 1
+let hiddenNotePattern = '[NOTE: %]'
+let hidePausedOverlay = true
 
-function loadReplacementList () {
-  browser.storage.sync.get('replacementList').then(storedSetting => {
-    const list = storedSetting.replacementList
-    if (!Array.isArray(list)) return
+async function loadSettings () {
+  const settings = await browser.storage.sync.get({
+    replacementList: [],
+    textScale: 1,
+    hiddenNotePattern: '[NOTE: %]',
+    hidePausedOverlay: true
+  })
+  ;({ replacementList, textScale, hiddenNotePattern, hidePausedOverlay } = settings)
 
-    replacementList = list.map(e => {
-      const from = handleExpression(e.from)
-      return { from, to: e.to }
-    })
+  replacementList = replacementList.map(e => {
+    const from = handleExpression(e.from)
+    return { from, to: e.to }
   })
 }
 
@@ -30,8 +36,8 @@ function handleExpression (e) {
   return new RegExp('\\b' + escapedWord + '\\b', 'g')
 }
 
-browser.storage.onChanged.addListener(loadReplacementList)
-loadReplacementList()
+browser.storage.onChanged.addListener(loadSettings)
+loadSettings()
 
 // Handles actual subtitle replacement
 // At the moment only works on Crunchyroll
@@ -47,15 +53,53 @@ function crunchyrollSubtitleHandler (details) {
   }
 
   filter.onstop = () => {
+    const tlStyleName = 'hidden_note_' + Math.random().toString(36).substr(2)
+
     // Apply substitutions
     data = replaceAssText(data, text => {
       for (const replacement of replacementList) {
         text = text.replace(replacement.from, replacement.to)
       }
       return text
+    }).replace(/^(Style: [^,]+,[^,]+,)(\d+)/gm, (all, prefix, size) => {
+      return prefix + (parseFloat(size) * textScale)
+    }).replace(/^Style:.*/m, style => {
+      if (!hiddenNotePattern) return style
+
+      // Create style for hidden notes
+      const parts = style.split(',')
+      parts[0] = 'Style: ' + tlStyleName
+      parts[2] = (parseFloat(parts[2]) * 0.75).toFixed(0)
+      parts[18] = 8
+
+      return style + '\r\n' + parts.join(',')
+    }).replace(/^Dialogue:.*\{[^}\\]+\}.*/gm, dialogue => {
+      if (!hiddenNotePattern) return dialogue
+
+      const parts = dialogue.split(',')
+      const matches = parts
+        .slice(9).join(',')
+        .match(/\{[^}\\]+\}/g)
+      if (!matches) return dialogue
+
+      parts[3] = tlStyleName
+      const noteContent = matches.map(e => e.slice(1, -1).trim()).join('; ').trim().replace(/%/g, '%%%%')
+      let newText = hiddenNotePattern.replace('%', noteContent)
+      if (newText === hiddenNotePattern) newText = hiddenNotePattern + ' ' + noteContent
+
+      const newDialogue = parts.slice(0, 9).concat(newText).join(',')
+      return dialogue + '\r\n' + newDialogue
     })
+
     filter.write(encoder.encode(data))
     filter.disconnect()
+
+    if (hidePausedOverlay) {
+      browser.tabs.insertCSS({
+        allFrames: true,
+        code: '[data-testid="vilos-large_play_pause_button"],#velocity-controls-package>:not([id]){display:none!important}'
+      })
+    }
   }
 
   return {}
@@ -118,7 +162,7 @@ browser.webRequest.onBeforeRequest.addListener(
   crunchyrollSubtitleHandler,
   {
     urls: [
-      'https://a-vrv.akamaized.net/*.txt*'
+      'https://v.vrv.co/*.txt*'
     ],
     types
   },

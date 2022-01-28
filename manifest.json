@@ -5,10 +5,10 @@
   "browser_action": {
       "default_title": "Options"
   },
-  "description": "Replace words in Crunchyroll Subtitles",
+  "description": "Formerly \"Subtitle Word Replacer\". A WebExtension that improves anime subtitles.",
   "homepage_url": "https://github.com/qgustavor/subtitle-word-replacer",
   "manifest_version": 2,
-  "name": "Subtitle Word Replacer",
+  "name": "Better Anime Subtitles",
   "options_ui": {
       "page": "options.html",
       "browser_style": true
@@ -18,15 +18,18 @@
     "96": "icon.svg"
   },
   "permissions": [
+      "tabs",
       "storage",
+      "activeTab",
       "webRequest",
       "webRequestBlocking",
+      "https://v.vrv.co/*",
       "https://dl.v.vrv.co/*",
       "https://a-vrv.akamaized.net/*",
       "https://www.crunchyroll.com/*",
       "https://static.crunchyroll.com/*"
   ],
-  "version": "1.2",
+  "version": "2.0",
   "browser_specific_settings": {
       "gecko": {
           "id": "subtitle-word-replacer@qgustavor.tk",
